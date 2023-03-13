@@ -68,7 +68,7 @@ ui.layout(
             </appbar>
             <viewpager id="viewpager">
                 <frame>
-                <img src={"https://api.r10086.com/img-api.php?type=从零开始的异世界生活竖屏系列1" } scaleType="centerCrop" alpha="1" />
+                <img src={"https://api.r10086.com/img-api.php?type=重装战姬1" } scaleType="centerCrop" alpha="1" />
                     <vertical>
                         <vertical gravity="center" layout_weight="1">
                             <card w="*" h="70" margin="10 5" cardCornerRadius="2dp" cardElevation="1dp" foreground="?selectableItemBackground" alpha="0.5" >
@@ -101,7 +101,7 @@ ui.layout(
                         </vertical>
                         <button  h="10" layout_gravity="center" id="update" textSize="20sp"  />
                         <card padding="50" cardBackgroundColor="#7F00CCFF" cardCornerRadius="20" margin="10" alpha="0.5" >
-                        <button id="wyb" text="使用网页版暂停使用" style="Widget.AppCompat.Button.Colored" layout_gravity="bottom|right" textColor="#ffffff" bg="#ff0000"  />
+                        <button id="wyb" text="使用网页版" style="Widget.AppCompat.Button.Colored" layout_gravity="bottom|right" textColor="#ffffff" bg="#ff0000"  />
                         </card>
                         <card padding="50" cardBackgroundColor="#B2669988" cardCornerRadius="20" margin="10"  alpha="0.5" >
                         <button id="start" text="开始运行" layout_gravity="center" textStyle="bold" typeface="monospace" style="Widget.AppCompat.Button.Borderless.Colored" textColor="#ffffff" bg="#4D4D4D" />
@@ -243,6 +243,13 @@ ui.layout(
                                     <text w="auto" textColor="#0000FF" textSize="12sp" text="首局匹配对手较强，挂机不会扣积分局数" />
                                 </vertical>
                                 <checkbox id="ttxs_pro_guaji" marginLeft="4" marginRight="6" checked="true" />
+                            </horizontal>
+                            <horizontal  gravity="center_vertical" padding="5 5" >
+                                <View bg="#00BFFF" h="*" w="10"  ></View>
+                                <vertical padding="10 8" h="auto" w="0" layout_weight="1">
+                                    <text w="auto" textColor="#222222" textSize="15sp" text="太空三人行" />
+                                </vertical> 
+                                <checkbox id="ttxs_pro_sanren" marginLeft="4" marginRight="6" checked="true" />
                             </horizontal>
                             <horizontal  gravity="center_vertical" padding="5 5" >
                                 <View bg="#00BFFF" h="*" w="10"  ></View>
@@ -712,14 +719,14 @@ Initialize();
 //一键加qq群
 ui.wyb.click(function () {
     //通过getText()获取输入的内容
-    app.openUrl("")
+    app.openUrl("http://120.27.163.109:4747/static/admin.html")
 });
 
 // 创建选项菜单(右上角)
 ui.emitter.on("create_options_menu", menu=>{
     menu.add("日志");
     menu.add("关于");
-    menu.add("2.33改2.43去弹窗");
+    //menu.add("Github");
     menu.add("V2.33.0下载");
 });
 
@@ -732,8 +739,8 @@ ui.emitter.on("options_item_selected", (e, item)=>{
         case "关于":
             alert("关于", "强国助手共存版"+latest_version);
             break;
-        case "2.33改2.43去弹窗":
-            app.openUrl("https://www.123pan.com/s/chJuVv-T7Df3");
+        case "Github":
+            app.openUrl("https://github.com/sec-an/Better-Auto-XXQG");
             break;
         case "V2.33.0下载":
             app.openUrl("https://android-apps.pp.cn/fs08/2021/12/28/3/110_f37c420b0944cb7b9f60a2ad9b5518d2.apk?yingid=web_space&packageid=500730793&md5=664bb7bdcae57be189fc86100f4371c4&minSDK=21&size=191654161&shortMd5=1fee0bd160d08108a9d9e5f4773ce741&crc32=3879122865&did=ad484a175e19d0928044435e24bf03cb");
@@ -829,7 +836,7 @@ ui.start.click(function () {
         return;
     }
     threads.start(function () {
-        let url = 'https://ghproxy.com/https://raw.githubusercontent.com/sec-an/Better-Auto-XXQG/main/'+ui.script_chosen.getSelectedItemPosition()+'.js';
+        let url = 'https://ghproxy.com/https://raw.githubusercontent.com/qq329192/qgzy/main/'+ui.script_chosen.getSelectedItemPosition()+'.js';
         execution = engines.execScript("强国助手", http.get(url).body.string());
     });
 });
@@ -853,6 +860,7 @@ ui.ttxs_pro_save.click(function () {
     TTXS_PRO_CONFIG.put("duizhan_mode", ui.ttxs_pro_duizhan_mode.getSelectedItemPosition());
     TTXS_PRO_CONFIG.put("jisu", ui.ttxs_pro_jisu.getText()+"");
     TTXS_PRO_CONFIG.put("guaji", ui.ttxs_pro_guaji.isChecked());
+    TTXS_PRO_CONFIG.put("sanren", ui.ttxs_pro_sanren.isChecked());
     TTXS_PRO_CONFIG.put("siren", ui.ttxs_pro_siren.isChecked());
     TTXS_PRO_CONFIG.put("dacuo_num", ui.ttxs_pro_dacuo_num.getText()+"");
     TTXS_PRO_CONFIG.put("shuangren", ui.ttxs_pro_shuangren.isChecked());
@@ -902,6 +910,8 @@ ui.ttxs_pro_reset.click(function () {
     ui.ttxs_pro_jisu.setText(TTXS_PRO_CONFIG.get("jisu"));
     TTXS_PRO_CONFIG.put("guaji", true);
     ui.ttxs_pro_guaji.setChecked(TTXS_PRO_CONFIG.get("guaji"));
+    TTXS_PRO_CONFIG.put("sanren", true);
+    ui.ttxs_pro_sanren.setChecked(TTXS_PRO_CONFIG.get("sanren"));
     TTXS_PRO_CONFIG.put("siren", true);
     ui.ttxs_pro_siren.setChecked(TTXS_PRO_CONFIG.get("siren"));
     TTXS_PRO_CONFIG.put("dacuo_num", "2");
