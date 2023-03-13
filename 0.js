@@ -2347,6 +2347,7 @@ function login(username, pwd) {
   var begin_obj = idMatches(/.*comm_head_xuexi_mine|.*btn_next/).findOne();
   if (begin_obj.text() == "登录") {
     log("查找ab");
+    log("跳过页面");
     let a = className("EditText").id("et_phone_input").findOne();
     let b = className("EditText").id("et_pwd_login").findOne();
     a.setText(username);
@@ -2355,7 +2356,7 @@ function login(username, pwd) {
     sleep(1000);
     begin_obj.click();
     sleep(5000);
-    
+    log("111111")
     if (text("同意并继续").findOne(5000)) {
       log("同意")
       click("同意并继续");
@@ -2554,6 +2555,7 @@ function xxqg(userinfo) {
     fInfo("已取消消息通知");
   });
   if (userinfo) {
+    log("11212212")
     var [username, pwd, token] = userinfo;
     login(username, pwd);
   }
