@@ -2354,9 +2354,13 @@ function login(username, pwd) {
     b.setText(pwd);
     sleep(1000);
     begin_obj.click();
-    sleep(3000);
-    if (text("同意并继续").visibleToUser().findOne(10000)) {
-      text("同意并继续").click();
+    sleep(5000);
+    
+    if (text("同意并继续").findOne(5000)) {
+      log("同意")
+      click("同意并继续");
+    }else{
+      log("跳过页面");
     };
     let packageName = getPackageName('学习强国');
     if (currentPackage() != packageName) {
