@@ -965,7 +965,7 @@ function do_duizhan1(renshu) {
         }
       }
       // 直到过渡界面消失，再匹配下一题
-      while (text("第" + num + "题").exists()) {} //sleep(100);
+      while (text("第" + num + "题").exists()) { } //sleep(100);
       //fTips("题号过渡消失");
     } else if (!err_flag) {
       err_flag = true;
@@ -1111,7 +1111,7 @@ function do_duizhan1(renshu) {
             sleep(random(delay, delay + 50));
           } else {
             // 直到选项完全出现在屏幕
-            while (className("android.widget.ListView").findOne(1000).indexInParent() == 0) {}
+            while (className("android.widget.ListView").findOne(1000).indexInParent() == 0) { }
           }
           let is_click = className("android.widget.RadioButton").findOnce(idx).parent().click();
           log(is_click);
@@ -1135,7 +1135,7 @@ function do_duizhan1(renshu) {
 
     // 如果上面答案不唯一或者不包含找到的选项，直到选项完全出现在屏幕
     try {
-      while (className("android.widget.ListView").findOne(1000).indexInParent() == 0) {}
+      while (className("android.widget.ListView").findOne(1000).indexInParent() == 0) { }
       //fTips("选项显现");
     } catch (e) {
       log("error2:", e);
@@ -1344,7 +1344,7 @@ function dacuo(renshu) {
       }
       // 直到过渡界面消失，再匹配下一题
       //log("等待题号过渡");
-      while (text("第" + num + "题").exists()) {} //sleep(100);
+      while (text("第" + num + "题").exists()) { } //sleep(100);
     } else if (!err_flag) {
       err_flag = true;
       if (text("继续挑战").exists()) {
@@ -1401,7 +1401,7 @@ function dacuo(renshu) {
       "D": 3
     };
     try { //防止别人先答完出错
-      while (className("android.widget.ListView").findOne(1000).indexInParent() == 0) {}
+      while (className("android.widget.ListView").findOne(1000).indexInParent() == 0) { }
       sleep(random(2000, 3000));
       //log("选项显现");
       className("android.widget.RadioButton").findOnce(random(0, 3)).parent().click();
@@ -2096,7 +2096,7 @@ function restart(restart_flag) {
       text('登录').waitFor();
       entry_jifen_project("每日");
       break;
-      // 1为每周答题
+    // 1为每周答题
     case 1:
       // 等待列表加载
       text('本月').waitFor();
@@ -2254,7 +2254,7 @@ function send_pushplus(token, sign_list) {
         total = option.child(2).text().match(/\d+/g)[1];
     else
       "new1" == jifen_flag ? ((title = option.child(0).text()), (score = option.child(3).child(0).text()), (total = option.child(3).child(2).text().match(/\d+/g)[0])) :
-      "new2" == jifen_flag && (title = option.child(0).text(), score = option.child(3).text().match(/\d+/g)[0], total = option.child(3).text().match(/\d+/g)[1]);
+        "new2" == jifen_flag && (title = option.child(0).text(), score = option.child(3).text().match(/\d+/g)[0], total = option.child(3).text().match(/\d+/g)[1]);
     "专项答题" == title && (total = 10);
     let percent = (Number(score) / Number(total) * 100).toFixed() + '%';
     let detail = title + ": " + score + "/" + total;
@@ -2355,6 +2355,9 @@ function login(username, pwd) {
     sleep(1000);
     begin_obj.click();
     sleep(3000);
+    if (text("同意并继续").visibleToUser().findOne(10000)) {
+      text("同意并继续").click();
+    };
     let packageName = getPackageName('学习强国');
     if (currentPackage() != packageName) {
       log("检测到弹窗，尝试返回");
@@ -2449,16 +2452,16 @@ function fInit() {
     <card cardCornerRadius='8dp' alpha="0.8">
       <vertical>
         <horizontal bg='#FF000000' padding='10 5'>
-        <text id='version' textColor="#FFFFFF" textSize="18dip">天天向上+</text>
-        <text id='title' h="*" textColor="#FFFFFF" textSize="13dip" layout_weight="1" gravity="top|right"></text>
+          <text id='version' textColor="#FFFFFF" textSize="18dip">天天向上+</text>
+          <text id='title' h="*" textColor="#FFFFFF" textSize="13dip" layout_weight="1" gravity="top|right"></text>
         </horizontal>
         <ScrollView>
           <vertical bg='#AA000000' id='container' minHeight='20' gravity='center'></vertical>
         </ScrollView>
       </vertical>
-    	<relative  gravity="right|bottom">
-    		<text id="username" textColor="#FFFFFF" textSize="12dip" padding='5 0'></text>
-    	</relative>
+      <relative gravity="right|bottom">
+        <text id="username" textColor="#FFFFFF" textSize="12dip" padding='5 0'></text>
+      </relative>
     </card>
   );
   ui.run(function () {
@@ -2683,17 +2686,17 @@ function main(userinfo) {
 /********定义全局变量*********/
 var jifen_list, meizhou_dao, zhuanxiang_dao, dingyue_dao, storage_user, name, jinri, zongfen;
 var jifen_map = {
-    "评论": 10,
-    "视频": 2,
-    "文章": 1,
-    "每日": 4,
-    "专项": 5,
-    "挑战": 6,
-    "四人": 7,
-    "双人": 8,
-    "订阅": 9,
-    "本地": 11
-  },
+  "评论": 10,
+  "视频": 2,
+  "文章": 1,
+  "每日": 4,
+  "专项": 5,
+  "挑战": 6,
+  "四人": 7,
+  "双人": 8,
+  "订阅": 9,
+  "本地": 11
+},
   jifen_flag = "old";
 // 分割账号
 var noverify_thread = noverify();
