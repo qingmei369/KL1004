@@ -2346,7 +2346,7 @@ function exit_app(name) {
 function login(username, pwd) {
   var begin_obj = idMatches(/.*comm_head_xuexi_mine|.*btn_next/).findOne();
   if (begin_obj.text() == "登录") {
-    log("查找ab");
+    log("查找ab跳过页面");
     log("跳过页面");
     let a = className("EditText").id("et_phone_input").findOne();
     let b = className("EditText").id("et_pwd_login").findOne();
