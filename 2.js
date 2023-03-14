@@ -1,3 +1,5 @@
+//lkjll
+
 auto.waitFor();
 importClass(android.database.sqlite.SQLiteDatabase);
 importClass("java.security.SecureRandom");
