@@ -122,7 +122,7 @@ var storage = storages.create('songgedodo');
 // 脚本版本号
 var last_version = "V10.11";
 var engine_version = "V11.2";
-var newest_version = "V11.5";
+var newest_version = "V11.6";
 if (storage.get(engine_version, true)) {
     storage.remove(last_version);
     let gengxin_rows = ["最新版本强国APP不支持多人对战，切勿更新！",
@@ -842,18 +842,24 @@ function do_tiaozhan() {
             let max_simi = 0;
             let xuanxiang = null;
             // 循环对比所有选项和答案，选出相似度最大的
-            for (let xuan_box of xuan_list) {
-                let xuan_txt = xuan_box.child(0).child(1).text();
-                //log(xuan_txt);
-                for (let ans of ans_list) {
-                    let similar = str_similar(ans.slice(2), xuan_txt);
-                    //log(xuan_txt, similar);
-                    if (similar > max_simi) {
-                        max_simi = similar;
-                        xuanxiang = xuan_box.child(0);
+            try {
+                for (let xuan_box of xuan_list) {
+                    let xuan_txt = xuan_box.child(0).child(1).text();
+                    //log(xuan_txt);
+                    for (let ans of ans_list) {
+                        let similar = str_similar(ans.slice(2), xuan_txt);
+                        //log(xuan_txt, similar);
+                        if (similar > max_simi) {
+                            max_simi = similar;
+                            xuanxiang = xuan_box.child(0);
+                        }
                     }
                 }
-            }
+            } catch (err) {
+                toastLog("报错,原因:" + err);
+                fInfo("挑战报错修复等待60秒 从新开始");
+                sleep(60000);
+            };
             if (xuanxiang != null) {
                 fInfo("最终：" + xuanxiang.child(1).text());
                 xuanxiang.click();
