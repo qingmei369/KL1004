@@ -343,7 +343,7 @@ function do_shipin() {
     textMatches(/刷新重试|继续播放/).exists() && (fInfo("检测到流量提醒"),
         textMatches(/刷新重试|继续播放/).findOne().click());
     sleep(random(8000, 9500));
-    let re_times = 6;
+    let re_times = 8;
     if (ddtong) {
         re_times += 6;
     }
@@ -627,6 +627,7 @@ function do_meizhou() {
     }
     // 等待加载
     text("查看提示").waitFor();
+    sleep(random(3000, 5000));
     // 获取右上题号，如1 /5
     var tihao = className("android.view.View").depth(24).findOnce(1).text();
     var num = Number(tihao[0]);
@@ -733,7 +734,7 @@ function do_zhuanxiang() {
     ran_sleep();
     // 等待加载
     text("查看提示").waitFor();
-    sleep(2000);
+    sleep(random(3000, 5000));
     // 获取右上题号，如1 /5
     var tihao = className("android.view.View").depth(24).findOnce(1).text();
     // 需要加个斜杠转义
@@ -834,6 +835,8 @@ function do_tiaozhan() {
         //     fInfo(que_txt.replace(/[^\u4e00-\u9fa5\d]|来源：.+|出题单位：.+/g, ""));
         //log("答案："+ans_list);
         ran_sleep();
+        sleep(random(3000, 5000));
+        fInfo("多停留一些时间尽量保证人工模拟");
         if (total >= max_total) {
             // 题数数够了随便选
             fInfo("已答对" + max_total + "题，全选A");
@@ -1012,7 +1015,7 @@ function do_duizhan1(renshu) {
             sleep(200);
             continue;
         }
-        sleep(100); // 追求极限速度，不知道会不会出错
+        sleep(random(1000, 1800));// 追求极限速度，不知道会不会出错
         let view_d28 = className("android.view.View").depth(28).indexInParent(0).findOne(1000);
         if (!view_d28) {
             toastLog("找不到view_d28");
@@ -1572,7 +1575,7 @@ function do_exec(type) {
     ran_sleep();
     // 等待加载
     text("提示").waitFor();
-
+    sleep(random(3000, 5000));
     // 判断题型
     /******************单选题*******************/
     if (textStartsWith("单选题").exists()) {
