@@ -342,7 +342,7 @@ function do_shipin() {
     //log(text("刷新重试").exists());
     textMatches(/刷新重试|继续播放/).exists() && (fInfo("检测到流量提醒"),
         textMatches(/刷新重试|继续播放/).findOne().click());
-    sleep(random(8000, 9500));
+    sleep(random(8000, 13000));
     let re_times = 8;
     if (ddtong) {
         re_times += 6;
@@ -351,7 +351,7 @@ function do_shipin() {
         click(device_w / 2, device_h / 2);
         sleep(500);
         swipe(device_w / 2, device_h * 0.8, device_w / 2, device_h * 0.1, 1000);
-        sleep(random(8000, 9500));
+        sleep(random(8000, 13000));
     }
     back();
     fInfo("视频个数已刷完");
@@ -428,7 +428,7 @@ function do_wenzhang() {
     // while (!id("general_card_image_id").findOne(1000)) {listview.scrollForward();}
     for (i = 0; i < 2; i++) {
         listview.scrollForward();
-        sleep(500);
+        sleep(1000);
     }
     // 自定义没有刷过的文章筛选器
     let wen_box_slt = className("android.view.ViewGroup").depth(20).filter(function (l) {
@@ -482,12 +482,12 @@ function do_wenzhang() {
             }
             swipe(device_w / 2, device_h * 0.7, device_w / 2, device_h * 0.3, 1000);
             if (wen_num < re_times - 1) {
-                sleep(random(9000, 10500));
+                sleep(random(9000, 13000));
             } else {
                 // 第6次停顿刷时间
                 //console.show();   
                 toastLog("正在刷时长程序未停止");
-                let shichang = 6 * random(55, 60);
+                let shichang = 7 * random(55, 60);
                 fClear();
                 fInfo("开始刷时长，总共" + shichang + "秒");
                 let wait_time = 1;
@@ -619,7 +619,7 @@ function do_meizhou() {
                 back(), text("每周答题").waitFor(), sleep(1000), back(), text("我要答题").waitFor(), sleep(1000), back(), text("我的").waitFor(), ran_sleep(), !0;
             // 如果到底则设置倒序为true
             scoll.scrollForward();
-            sleep(200);
+            sleep(500);
         }
         title = text("未作答").findOne().parent().child(0).text();
         fInfo(title + "开始作答");
@@ -627,7 +627,7 @@ function do_meizhou() {
     }
     // 等待加载
     text("查看提示").waitFor();
-    sleep(random(3000, 5000));
+    sleep(random(3000, 8000));
     // 获取右上题号，如1 /5
     var tihao = className("android.view.View").depth(24).findOnce(1).text();
     var num = Number(tihao[0]);
@@ -734,7 +734,7 @@ function do_zhuanxiang() {
     ran_sleep();
     // 等待加载
     text("查看提示").waitFor();
-    sleep(random(3000, 5000));
+    sleep(random(3000, 8000));
     // 获取右上题号，如1 /5
     var tihao = className("android.view.View").depth(24).findOnce(1).text();
     // 需要加个斜杠转义
@@ -835,7 +835,7 @@ function do_tiaozhan() {
         //     fInfo(que_txt.replace(/[^\u4e00-\u9fa5\d]|来源：.+|出题单位：.+/g, ""));
         //log("答案："+ans_list);
         ran_sleep();
-        sleep(random(3000, 5000));
+        sleep(random(5000, 8000));
         fInfo("多停留一些时间尽量保证人工模拟");
         if (total >= max_total) {
             // 题数数够了随便选
@@ -865,6 +865,7 @@ function do_tiaozhan() {
             };
             if (xuanxiang != null) {
                 fInfo("最终：" + xuanxiang.child(1).text());
+                sleep(random(5000, 8000));
                 xuanxiang.click();
             } else {
                 fInfo("无匹配答案");
@@ -1015,7 +1016,7 @@ function do_duizhan1(renshu) {
             sleep(200);
             continue;
         }
-        sleep(random(1000, 1800));// 追求极限速度，不知道会不会出错
+        sleep(random(1000, 1200));// 追求极限速度，不知道会不会出错
         let view_d28 = className("android.view.View").depth(28).indexInParent(0).findOne(1000);
         if (!view_d28) {
             toastLog("找不到view_d28");
@@ -1276,6 +1277,8 @@ function do_duizhan1(renshu) {
             if (right_xuan != '' && duizhan_mode != 2) {
                 let idx = idx_dict[right_xuan];
                 fInfo("最终:" + right_xuan);
+                fInfo("测试等待3之6秒模拟人工 测试胜率");
+                sleep(random(3000, 6000));
                 try {
                     className("android.widget.RadioButton").findOnce(idx).parent().click();
                 } catch (e) {
@@ -1575,7 +1578,7 @@ function do_exec(type) {
     ran_sleep();
     // 等待加载
     text("提示").waitFor();
-    sleep(random(3000, 5000));
+    sleep(random(5000, 8000));
     // 判断题型
     /******************单选题*******************/
     if (textStartsWith("单选题").exists()) {
