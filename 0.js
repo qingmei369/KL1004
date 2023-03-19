@@ -122,7 +122,7 @@ var storage = storages.create('songgedodo');
 // 脚本版本号
 var last_version = "V10.11";
 var engine_version = "V11.2";
-var newest_version = "V11.7";
+var newest_version = "V11.8";
 if (storage.get(engine_version, true)) {
     storage.remove(last_version);
     let gengxin_rows = ["最新版本强国APP不支持多人对战，切勿更新！",
@@ -890,8 +890,24 @@ function do_tiaozhan() {
                 text("再来一局").findOne().click();
             } else {
                 // 退出
-                a && (back(), textStartsWith("total").waitFor(), sleep(2000)), back(),
-                    text("登录").waitFor();
+                a && (back(), textStartsWith("total").waitFor(), sleep(2000)), back();
+                //  text("登录").waitFor();
+                if (text("登录").findOne(10000)) {
+                    fInfo("回到积分页面");
+                    sleep(2222);
+                } else {
+                    fInfo("未回到积分页面");
+                    back();
+                    sleep(2222);
+                };
+                if (text("登录").findOne(10000)) {
+                    fInfo("回到积分页面");
+                    sleep(2222);
+                } else {
+                    fInfo("未回到积分页面");
+                    back();
+                    sleep(5555);
+                };
                 ran_sleep();
                 total = 0;
                 return true;
